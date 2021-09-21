@@ -3,7 +3,7 @@ const User = db.users;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   if (!req.body.name) {
     res.status(400).send({
       message: "Username cannot be empty",
@@ -16,17 +16,13 @@ exports.create = (req, res) => {
     return;
   }
 
-  //   User.findAll().then((users) => {
-  //     users.forEach((user) => {
-  //       if (user.name === req.body.name) {
-  //         res.status(500).send({
-  //           message: "Username already exists",
-  //         });
-  //         return;
-  //       }
-  //     });
-  //   });
-  console.log(findExistName(req.body.name));
+  const duplicate = await findExistName(req.body.name);
+  if (duplicate) {
+    res.status(500).send({
+      message: "Username already exists",
+    });
+    return;
+  }
 
   const user = {
     name: req.body.name,
@@ -63,22 +59,11 @@ exports.delete = (req, res) => {};
 exports.deleteAll = (req, res) => {};
 
 //private
-// const findExistName = (newName) => {
-//   User.findAll().then((users) => {
-//     users.every((user) => {
-//       if (user.name === newName) {
-//         return true;
-//       }
-//     });
-//   });
-// };
-
-const findExistName = (newName) => {
-  User.findAll({
+const findExistName = async (newName) => {
+  const users = await User.findAll({
     where: {
       name: newName,
     },
-  }).then((user) => {
-    return user.length;
   });
+  return users.length > 0;
 };
