@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
 
   const duplicate = await findExistName(req.body.name);
   if (duplicate) {
-    res.status(500).send({
+    res.status(400).send({
       message: "Username already exists",
     });
     return;
@@ -43,7 +43,16 @@ exports.create = async (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-  res.send({ message: "find all" });
+  User.findAll()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users.",
+      });
+    });
 };
 
 // Find a single Tutorial with an id
