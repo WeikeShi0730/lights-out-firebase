@@ -124,7 +124,6 @@ const checkPassword = async (name, password) => {
   const decryptedPassword = decrytion(name, userObj.password);
   if (password === decryptedPassword) {
     const { password, ...userOmitPassword } = userObj;
-    console.log(userOmitPassword);
     return userOmitPassword;
   }
   return false;
