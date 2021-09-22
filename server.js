@@ -23,11 +23,6 @@ db.sequelize.sync();
 //     console.log("Drop and re-sync db.");
 //   });
 
-// simple route
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome" });
-// });
-
 require("./app/routes/user.routes")(app);
 
 // set port, listen for requests
