@@ -32,7 +32,7 @@ exports.create = async (req, res) => {
   const user = {
     name: name,
     password: encryptedPassword,
-    timer: null,
+    timer: Math.random(), //!!!!!!!!!!!!!!!!!!!!!!!!!!TEST
   };
 
   User.create(user)
@@ -79,6 +79,9 @@ exports.findAll = (req, res) => {
         const userObj = user.dataValues;
         const { password, ...userObjReturn } = userObj;
         userObjReturnArray.push(userObjReturn);
+      });
+      userObjReturnArray.sort((user_0, user_1) => {
+        return user_0.timer - user_1.timer;
       });
       res.status(200).send(userObjReturnArray);
     })

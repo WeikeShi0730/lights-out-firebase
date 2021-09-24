@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     timer: {
-      type: Sequelize.STRING,
+      type: Sequelize.DOUBLE,
     },
   });
 
