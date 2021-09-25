@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon --delay 3 server.js"
+    "serve": "nodemon --delay 2.5 server.js"
   },
   "keywords": [
     "nodejs",

@@ -28,10 +28,12 @@ exports.create = async (req, res) => {
 
   const name = req.body.name;
   const password = req.body.password;
+  const country = req.body.country;
   const encryptedPassword = encryption(name, password);
   const user = {
     name: name,
     password: encryptedPassword,
+    country: country,
     timer: Math.random(), //!!!!!!!!!!!!!!!!!!!!!!!!!!TEST
   };
 
