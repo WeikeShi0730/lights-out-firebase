@@ -55,7 +55,7 @@ exports.signIn = async (req, res) => {
   const name = req.body.name;
   const exist = await findExistName(name);
   if (!exist) {
-    res.status(400).send({
+    res.status(500).send({
       message: "Cannot find the name provided",
     });
     return;
@@ -94,16 +94,41 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Update a Tutorial by the id in the request
+exports.update = async (req, res) => {
+  const id = req.body.id;
+  try {
+    await User.update(req.body, {
+      where: { id: id },
+    });
+    res.status(200).send({ message: "timer updated successfully" });
+  } catch (error) {
+    res.status(500).send({
+      message: "Error updating timer with id=" + id,
+    });
+  }
+};
+
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
   console.log("hello find one");
 };
 
-// Update a Tutorial by the id in the request
-exports.update = (req, res) => {};
-
 // Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {};
+exports.delete = async (req, res) => {
+  const id = req.params.id;
+  try {
+    console.log("deletinggggg")
+    await User.destroy({
+      where: { id: id },
+    });
+    res.status(200).send({ message: "user deleted successfully" });
+  } catch (error) {
+    res.status(500).send({
+      message: "Error deleting with id=" + id,
+    });
+  }
+};
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {};
