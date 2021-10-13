@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "formula1-display-regular";
+  src: url("./assets/Formula1-Regular_web_0.ttf") format("woff"),
+    url("./assets/Formula1-Regular_web_0.ttf") format("opentype"),
+    url("./assets/Formula1-Regular_web_0.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  font-family: "formula1-display-regular";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

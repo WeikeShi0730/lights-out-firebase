@@ -1,0 +1,47 @@
+.f1-lights {
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+
+  .back-board {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 50%;
+    height: 5%;
+    background: #000;
+    transform: translateY(-50%);
+  }
+
+  .light-strip {
+    background: black;
+    border-radius: 11px;
+    margin: 0 2px;
+    position: relative;
+    flex: 1;
+  }
+  @media (min-width: 435px) {
+    .light-strip {
+      margin: 0 5px;
+      border-radius: 14px;
+    }
+  }
+
+  .light {
+    border-radius: 100%;
+    background: #222;
+    margin: 10px;
+  }
+
+  .light::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  .light-strip.on .light:nth-child(1n + 3) {
+    background: red;
+  }
+}
