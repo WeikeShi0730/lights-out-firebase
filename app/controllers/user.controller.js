@@ -1,18 +1,22 @@
 const db = require("../models");
 const User = db.users;
-const Op = db.Sequelize.Op;
 const CryptoJS = require("crypto-js");
 
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
   if (!req.body.name) {
-    res.status(400).send({
-      message: "Username cannot be empty",
+    res.status(500).send({
+      message: "username cannot be empty",
     });
     return;
   } else if (!req.body.password) {
-    res.status(400).send({
-      message: "Password cannot be empty",
+    res.status(500).send({
+      message: "password cannot be empty",
+    });
+    return;
+  } else if (!req.body.country) {
+    res.status(500).send({
+      message: "country cannot be empty",
     });
     return;
   }
@@ -20,8 +24,8 @@ exports.create = async (req, res) => {
   // Check if name is already in use
   const duplicate = await findExistName(req.body.name);
   if (duplicate) {
-    res.status(400).send({
-      message: "Username already exists",
+    res.status(500).send({
+      message: "username already exists",
     });
     return;
   }
@@ -34,20 +38,19 @@ exports.create = async (req, res) => {
     name: name,
     password: encryptedPassword,
     country: country,
-    timer: Math.random(), //!!!!!!!!!!!!!!!!!!!!!!!!!!TEST
+    timer: Number.MAX_VALUE,
   };
 
-  User.create(user)
-    .then((data) => {
-      const userObj = data.dataValues;
-      const { password, ...userObjReturn } = userObj;
-      res.status(200).send(userObjReturn);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Failed to create a driver profile.",
-      });
+  try {
+    const data = await User.create(user);
+    const userObj = data.dataValues;
+    const { password, ...userObjReturn } = userObj;
+    res.status(201).send(userObjReturn);
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || "failed to create a driver profile.",
     });
+  }
 };
 
 //Sign In
@@ -56,7 +59,7 @@ exports.signIn = async (req, res) => {
   const exist = await findExistName(name);
   if (!exist) {
     res.status(500).send({
-      message: "Cannot find the name provided",
+      message: "cannot find the name provided",
     });
     return;
   }
@@ -64,34 +67,33 @@ exports.signIn = async (req, res) => {
   const password = req.body.password;
   const verifiedUser = await checkPassword(name, password);
   if (verifiedUser) {
-    res.status(200).send(verifiedUser);
+    res.status(202).send(verifiedUser);
   } else {
-    res.status(400).send({
-      message: "Sign In failed, wrong password",
+    res.status(500).send({
+      message: "sign In failed, wrong password",
     });
   }
 };
 
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
-  User.findAll()
-    .then((data) => {
-      var userObjReturnArray = [];
-      data.forEach((user) => {
-        const userObj = user.dataValues;
-        const { password, ...userObjReturn } = userObj;
-        userObjReturnArray.push(userObjReturn);
-      });
-      userObjReturnArray.sort((user_0, user_1) => {
-        return user_0.timer - user_1.timer;
-      });
-      res.status(200).send(userObjReturnArray);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving users.",
-      });
+exports.findAll = async (req, res) => {
+  try {
+    const data = await User.findAll();
+    var userObjReturnArray = [];
+    data.forEach((user) => {
+      const userObj = user.dataValues;
+      const { password, ...userObjReturn } = userObj;
+      userObjReturnArray.push(userObjReturn);
     });
+    userObjReturnArray.sort((user_0, user_1) => {
+      return user_0.timer - user_1.timer;
+    });
+    res.status(200).send(userObjReturnArray);
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || "failed to create a driver profile.",
+    });
+  }
 };
 
 // Update a Tutorial by the id in the request
@@ -101,37 +103,28 @@ exports.update = async (req, res) => {
     await User.update(req.body, {
       where: { id: id },
     });
-    res.status(200).send({ message: "timer updated successfully" });
+    res.status(202).send({ message: "timer updated successfully" });
   } catch (error) {
     res.status(500).send({
-      message: "Error updating timer with id=" + id,
+      message: "error updating timer with id=" + id,
     });
   }
-};
-
-// Find a single Tutorial with an id
-exports.findOne = (req, res) => {
-  console.log("hello find one");
 };
 
 // Delete a Tutorial with the specified id in the request
 exports.delete = async (req, res) => {
   const id = req.params.id;
   try {
-    console.log("deletinggggg")
     await User.destroy({
       where: { id: id },
     });
     res.status(200).send({ message: "user deleted successfully" });
   } catch (error) {
     res.status(500).send({
-      message: "Error deleting with id=" + id,
+      message: "error deleting with id=" + id,
     });
   }
 };
-
-// Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {};
 
 //private
 const findExistName = async (newName) => {
