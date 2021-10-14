@@ -2,7 +2,7 @@
   "name": "lights-out",
   "version": "0.1.0",
   "private": true,
-  "engins": {
+  "engines": {
     "node": "14.x",
     "npm": "6.14.12"
   },
