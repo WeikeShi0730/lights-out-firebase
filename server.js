@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-// Use for dev
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   const cors = require("cors");
   var corsOptions = {
