@@ -13,7 +13,7 @@
     "server": "nodemon server.js",
     "build": "npm run build && cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "start": "node server.js",
+    "start": "node server.js && cd client && npm start",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "keywords": [
