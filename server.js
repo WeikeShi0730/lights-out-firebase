@@ -1,14 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:3000",
-};
-
-app.use(cors(corsOptions));
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  var corsOptions = {
+    origin: "http://localhost:3000",
+  };
+  app.use(cors(corsOptions));
+}else{
+}
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -30,3 +33,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+const buildPath = path.join(__dirname, "..", "build");
+app.use(express.static(buildPath));
