@@ -8,7 +8,10 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   dialect: config.DIALECT,
   operatorsAliases: false,
   dialectOptions: {
-    ssl: false,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
   pool: {
     max: parseInt(config.POOL_MAX),
