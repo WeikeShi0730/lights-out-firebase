@@ -1,18 +1,15 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const path = require("path");
-
 const app = express();
 
+// Use for dev
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  const cors = require("cors");
   var corsOptions = {
     origin: "http://localhost:3000",
   };
   app.use(cors(corsOptions));
-}else{
 }
-
 // parse requests of content-type - application/json
 app.use(express.json());
 
