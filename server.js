@@ -9,6 +9,10 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   };
   app.use(cors(corsOptions));
 }
+
+const buildPath = path.join(__dirname, "..", "build");
+app.use(express.static(buildPath));
+
 // parse requests of content-type - application/json
 app.use(express.json());
 
@@ -29,6 +33,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-const buildPath = path.join(__dirname, "..", "build");
-app.use(express.static(buildPath));
