@@ -5,7 +5,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:5000";
 } else {
   // production code
-  baseURL = "";
+  baseURL = "http://f1-lightsout.herokuapp.com";
 }
 export default axios.create({
   baseURL: baseURL,
