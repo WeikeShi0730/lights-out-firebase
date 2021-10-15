@@ -17,7 +17,6 @@ const update = (newData) => {
 };
 
 const remove = (id) => {
-  console.log(id);
   return http.delete(`/sign-out/${id}`);
 };
 
