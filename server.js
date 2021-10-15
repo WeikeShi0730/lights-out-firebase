@@ -8,6 +8,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
     origin: "http://localhost:3000",
   };
   app.use(cors(corsOptions));
+} else if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  console.log("dirname", __dirname);
+  // app.get("*", function (req, res) {
+  //   res.sendFile(path.join(__dirname, "client/build/index.html"));
+  // });
 }
 
 // parse requests of content-type - application/json
@@ -30,10 +36,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "client/build/index.html"));
-  });
-}
