@@ -8,10 +8,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
     origin: "http://localhost:3000",
   };
   app.use(cors(corsOptions));
+} else if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
 }
-
-const buildPath = path.join(__dirname, "..", "build");
-app.use(express.static(buildPath));
 
 // parse requests of content-type - application/json
 app.use(express.json());
