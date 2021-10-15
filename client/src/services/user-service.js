@@ -9,11 +9,11 @@ const signIn = (data) => {
 };
 
 const getAll = () => {
-  return http.get("/");
+  return http.get("/get");
 };
 
 const update = (newData) => {
-  return http.put("/", newData);
+  return http.put("/update", newData);
 };
 
 const remove = (id) => {

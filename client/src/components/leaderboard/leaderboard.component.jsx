@@ -11,7 +11,6 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
       try {
         const fetchedData = await UserService.getAll();
         const data = fetchedData.data;
-        console.log("data", data);
         setLeaderboard(data);
       } catch (error) {
         console.error(error.response.data.message);

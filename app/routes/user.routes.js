@@ -11,10 +11,10 @@ module.exports = (app) => {
   router.post("/sign-in", users.signIn);
 
   // Retrieve all Users
-  router.get("/", users.findAll);
+  router.get("/get", users.findAll);
 
   // Update a User with id
-  router.put("/", users.update);
+  router.put("/update", users.update);
 
   // Delete a User with id
   router.delete("/sign-out/:id", users.delete);
