@@ -37,7 +37,7 @@ const SignUp = ({ setCurrentUser }) => {
     try {
       const res = await UserService.signUp(signUpInfo);
       setCurrentUser(res.data);
-      history.push("/api");
+      history.push("/");
       toast.success("success ✅", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
@@ -109,7 +109,7 @@ const SignUp = ({ setCurrentUser }) => {
       <div className="w-full max-w-md m-auto mt-4">
         <div className="flex justify-center items-center">already have an account?</div>
         <div>
-          <Link to="/api/sign-in">
+          <Link to="/sign-in">
             <div className="flex justify-center items-center mt-6">
               <button
                 className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"

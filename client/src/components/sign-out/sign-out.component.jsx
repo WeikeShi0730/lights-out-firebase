@@ -33,7 +33,7 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
   };
   return (
     <div className="grid grid-rows-2 grid-flow-col gap-4 justify-items-center mt-20">
-      <Link to="/api">
+      <Link to="/">
         <button
           onClick={clearCurrentUser}
           className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"
@@ -41,7 +41,7 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
           sign out
         </button>
       </Link>
-      <Link to="/api">
+      <Link to="/">
         <button
           onClick={handleDelete}
           className="bg-red-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"
