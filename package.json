@@ -1,7 +1,6 @@
 {
   "name": "lights-out-node",
   "version": "1.0.0",
-  "homepage":".",
   "description": "",
   "engines": {
     "node": "14.x",
