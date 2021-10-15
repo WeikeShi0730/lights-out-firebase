@@ -12,12 +12,6 @@ const sequelize = new Sequelize(config.DATABASE_URL, {
       rejectUnauthorized: false,
     },
   },
-  // pool: {
-  //   max: parseInt(config.POOL_MAX),
-  //   min: parseInt(config.POOL_MIN),
-  //   acquire: parseInt(config.POOL_ACQUIRE),
-  //   idle: parseInt(config.POOL_IDLE),
-  // },
 });
 
 const db = {};
