@@ -77,6 +77,7 @@ exports.signIn = async (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = async (req, res) => {
+  console.log(req);
   try {
     const data = await User.findAll();
     var userObjReturnArray = [];
