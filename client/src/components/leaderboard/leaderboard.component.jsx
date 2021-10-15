@@ -57,6 +57,9 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
       } else {
         return (
           <div>
+            {console.log("!!!!!!!!!!!!!!!!!!!!!!!!")}
+            {console.log(leaderboard)}
+            {console.log(leaderboard.slice(0, numberOfUsersDisplay))}
             {leaderboard.slice(0, numberOfUsersDisplay).map((user, i) => (
               <IndividualPlayer key={i} user={user} ranking={i + 1} />
             ))}

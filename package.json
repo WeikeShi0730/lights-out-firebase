@@ -7,6 +7,8 @@
     "npm": "6.14.12"
   },
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "build": "npm install && npm run build",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
