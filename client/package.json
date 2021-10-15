@@ -1,6 +1,5 @@
 {
   "name": "lights-out",
-  "homepage":"https://f1-lightsout.herokuapp.com/api",
   "version": "0.1.0",
   "private": true,
   "engines": {
