@@ -15,7 +15,7 @@ function App() {
       <ToastContainer autoClose={4000} />
       <Header />
       <Switch>
-        <Route exact path="/" component={Main} />
+        <Route exact path="/api" component={Main} />
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/sign-up" component={SignUp} />
         <Route path="/sign-out/:id" component={SignOut} />
