@@ -7,7 +7,7 @@ const Header = ({ currentUser }) => {
     <div>
       <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6">
         <div className="flex items-center flex-shrink-0 flex-grow text-white mr-6">
-          <Link to="/">
+          <Link to="/api">
             <img
               className="fill-current xs:mr-2 h-8"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png"
@@ -24,7 +24,7 @@ const Header = ({ currentUser }) => {
               </button>
             </Link>
           ) : (
-            <Link to="/sign-in">
+            <Link to="/api/sign-in">
               <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">
                 sign in
               </button>
