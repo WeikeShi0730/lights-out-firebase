@@ -1,16 +1,16 @@
 import axios from "axios";
-var baseURL;
+var url;
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   // dev code
-  baseURL = "http://localhost:5000/api";
+  url = "http://localhost:5000/api";
 } else {
   // production code
-  baseURL = "/api";
+  url = "/api";
 }
 
-console.log("baseURL", baseURL)
+console.log("baseURL", url)
 export default axios.create({
-  baseURL: baseURL,
+  baseURL: url,
   headers: {
     "Content-type": "application/json",
   },
