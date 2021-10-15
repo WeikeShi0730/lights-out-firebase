@@ -9,7 +9,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   };
   app.use(cors(corsOptions));
 } else if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+  app.use('/api/', express.static(path.join(__dirname, "/client/build")));
 }
 
 // parse requests of content-type - application/json
@@ -31,7 +31,7 @@ require("./app/routes/user.routes")(app);
 // match one above, send back React's index.html file.
 if (process.env.NODE_ENV === "production") {
   app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "client/build/index.html"));
+    res.sendFile(path.join(__dirname, "/client/build/index.html"));
   });
 }
 
