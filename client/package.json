@@ -1,7 +1,6 @@
 {
   "name": "lights-out",
   "homepage":".",
-  "main": "index.js",
   "version": "0.1.0",
   "private": true,
   "engines": {
