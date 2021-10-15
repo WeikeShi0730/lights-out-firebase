@@ -7,8 +7,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   // production code
   url = "/api";
 }
-
-console.log("baseURL", url)
 export default axios.create({
   baseURL: url,
   headers: {

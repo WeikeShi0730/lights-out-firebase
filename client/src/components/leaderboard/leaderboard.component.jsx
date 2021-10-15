@@ -10,8 +10,8 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
     async function fecthData() {
       try {
         const fetchedData = await UserService.getAll();
-        console.log("fetchedData", fetchedData);
         const data = fetchedData.data;
+        console.log("data", data);
         setLeaderboard(data);
       } catch (error) {
         console.error(error.response.data.message);
@@ -58,7 +58,6 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
       } else {
         return (
           <div>
-            {console.log(leaderboard)}
             {leaderboard.slice(0, numberOfUsersDisplay).map((user, i) => (
               <IndividualPlayer key={i} user={user} ranking={i + 1} />
             ))}
