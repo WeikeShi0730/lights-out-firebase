@@ -9,7 +9,8 @@ const signIn = (data) => {
 };
 
 const getAll = () => {
-  return http.get("/");
+  console.log("http.get(" / ")", http.get("/api"));
+  return http.get("/api");
 };
 
 const update = (newData) => {
