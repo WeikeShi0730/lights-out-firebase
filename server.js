@@ -8,9 +8,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
     origin: "http://localhost:3000",
   };
   app.use(cors(corsOptions));
-} else if (process.env.NODE_ENV === "production") {
-  app.use("/api/", express.static(path.join(__dirname, "/client/build")));
 }
+
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.resolve(__dirname, "/client/build")));
+// }
+app.use(express.static(path.resolve(__dirname, "client/build")));
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -29,12 +32,9 @@ require("./app/routes/user.routes")(app);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-if (process.env.NODE_ENV === "production") {
-  console.log("__dirname", __dirname);
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "client/build/index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+});
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
