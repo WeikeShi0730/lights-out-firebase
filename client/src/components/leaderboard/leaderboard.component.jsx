@@ -8,12 +8,13 @@ import IndividualPlayer from "../individual-player/individual-player.component";
 const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   const fecthData = async () => {
     try {
-      const fetchedData = await UserService.getAll();
-      const data = fetchedData.data;
+      console.log("IN HERE");
+      // const fetchedData = await UserService.getAll();
+      // const data = fetchedData.data;
 
-      // const fetchedData = await fetch("http://localhost:5000/api/get");
-      // const json = await fetchedData.json();
-      // const data = json;
+      const fetchedData = await fetch("https://f1-lightsout.herokuapp.com/api/get");
+      const json = await fetchedData.json();
+      const data = json;
 
       console.log("fetchedData", fetchedData);
       console.log("data", data);
