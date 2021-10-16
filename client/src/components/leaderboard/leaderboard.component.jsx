@@ -30,6 +30,7 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   };
 
   const leaderboardList = () => {
+    console.log("???????????????????")
     const numberOfUser = leaderboard.length;
     const numberOfUsersDisplay =
       leaderboard.length > 10 ? 10 : leaderboard.length;
