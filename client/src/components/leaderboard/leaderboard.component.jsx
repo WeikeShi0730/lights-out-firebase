@@ -8,9 +8,11 @@ import IndividualPlayer from "../individual-player/individual-player.component";
 const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   useEffect(() => {
     async function fecthData() {
+      console.log("IIIIIIIIIIIIIIIIIII")
       try {
         const fetchedData = await UserService.getAll();
         const data = fetchedData.data;
+        console.log(data)
         setLeaderboard(data);
       } catch (error) {
         console.error(error.response.data.message);
