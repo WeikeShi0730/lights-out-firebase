@@ -5,7 +5,7 @@ const app = express();
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   const cors = require("cors");
   var corsOptions = {
-    origin: "http://localhost:3000",
+    origin: "*",
   };
   app.use(cors(corsOptions));
 }

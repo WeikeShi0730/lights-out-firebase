@@ -6,18 +6,23 @@ import UserService from "../../services/user-service";
 import IndividualPlayer from "../individual-player/individual-player.component";
 
 const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
-  useEffect(() => {
-    async function fecthData() {
-      console.log("IIIIIIIIIIIIIIIIIII")
-      try {
-        const fetchedData = await UserService.getAll();
-        const data = fetchedData.data;
-        console.log(data)
-        setLeaderboard(data);
-      } catch (error) {
-        console.error(error.response.data.message);
-      }
+  const fecthData = async () => {
+    try {
+      const fetchedData = await UserService.getAll();
+      const data = fetchedData.data;
+
+      // const fetchedData = await fetch("http://localhost:5000/api/get");
+      // const json = await fetchedData.json();
+      // const data = json;
+
+      console.log("fetchedData", fetchedData);
+      console.log("data", data);
+      setLeaderboard(data);
+    } catch (error) {
+      console.error(error.response.data.message);
     }
+  };
+  useEffect(() => {
     fecthData();
   }, []);
 
@@ -30,7 +35,7 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   };
 
   const leaderboardList = () => {
-    console.log("???????????????????")
+    console.log("???????????????????");
     const numberOfUser = leaderboard.length;
     const numberOfUsersDisplay =
       leaderboard.length > 10 ? 10 : leaderboard.length;
