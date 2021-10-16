@@ -19,7 +19,7 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
       }
     }
     fecthData();
-  }, [setLeaderboard]);
+  }, []);
 
   const dot = () => {
     return (
