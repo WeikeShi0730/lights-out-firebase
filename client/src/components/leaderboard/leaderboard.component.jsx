@@ -105,7 +105,9 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
     <div>
       <h1 className="flex justify-center text-2xl">leaderboard</h1>
       <div className="grid gap-y-8">
-        <div className="ml-5 mr-5">{leaderboardList()}</div>
+        <div className="ml-5 mr-5">
+          {leaderboard ? leaderboardList() : "Loading..."}
+        </div>
       </div>
     </div>
   );
