@@ -13,10 +13,12 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
       // const data = fetchedData.data;
 
       const fetchedData = await fetch("https://f1-lightsout.herokuapp.com/api/get");
-      const json = await fetchedData.json();
-      const data = json;
-
       console.log("fetchedData", fetchedData);
+      const data = fetchedData.data;
+      // const json = await fetchedData.json();
+      // const data = json;
+
+      
       console.log("data", data);
       setLeaderboard(data);
     } catch (error) {
