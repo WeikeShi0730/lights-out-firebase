@@ -1,5 +1,7 @@
 const db = require("../models");
 const User = db.users;
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const CryptoJS = require("crypto-js");
 
 // Create and Save a new Tutorial
@@ -45,6 +47,8 @@ exports.create = async (req, res) => {
     const data = await User.create(user);
     const userObj = data.dataValues;
     const { password, ...userObjReturn } = userObj;
+    const token = generateAccessToken({ username: name });
+    userObjReturn["token"] = token;
     res.status(201).send(userObjReturn);
   } catch (error) {
     res.status(500).send({
@@ -67,6 +71,8 @@ exports.signIn = async (req, res) => {
   const password = req.body.password;
   const verifiedUser = await checkPassword(name, password);
   if (verifiedUser) {
+    const token = generateAccessToken({ username: name });
+    verifiedUser["token"] = token;
     res.status(202).send(verifiedUser);
   } else {
     res.status(500).send({
@@ -160,4 +166,8 @@ const decrytion = (passphrase, encryptedPassword) => {
   return CryptoJS.AES.decrypt(encryptedPassword, passphrase).toString(
     CryptoJS.enc.Utf8
   );
+};
+
+const generateAccessToken = (username) => {
+  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: "7200s" });
 };

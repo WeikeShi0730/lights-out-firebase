@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import UserService from "../../services/user-service";
 import { toast } from "react-toastify";
 import "./stopwatch.styles.scss";
@@ -27,6 +28,7 @@ const Stopwatch = ({
   const [currentBest, setCurrentBest] = useState(
     currentUser ? currentUser.timer : null
   );
+  const history = useHistory();
 
   const intervalLightsRef = useRef(intervalLights);
   intervalLightsRef.current = intervalLights;
@@ -140,14 +142,17 @@ const Stopwatch = ({
       try {
         let updatedUser = { ...currentUser };
         updatedUser["timer"] = currentTimer;
+        const { token, ...updatedUserNoToken } = updatedUser;
         setCurrentUser(updatedUser);
-        await UserService.update(updatedUser);
+        await UserService.update(updatedUserNoToken, token);
         toast.success("new personal record 🎉", {
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",
           autoClose: 3000,
         });
       } catch (error) {
+        setCurrentUser(null);
+        history.push("/sign-in");
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",

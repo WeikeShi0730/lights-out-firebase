@@ -16,7 +16,8 @@ const SignIn = ({ setCurrentUser }) => {
     event.preventDefault();
     try {
       const res = await UserService.signIn(signInInfo);
-      setCurrentUser(res.data);
+      const currentUser = res.data;
+      setCurrentUser(currentUser);
       history.push("/");
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -69,22 +70,20 @@ const SignIn = ({ setCurrentUser }) => {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button
-              className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"
-            >
+            <button className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark">
               sign in
             </button>
           </div>
         </form>
       </div>
       <div className="w-full max-w-md m-auto mt-4">
-        <div className="flex justify-center items-center">don't have an account yet?</div>
+        <div className="flex justify-center items-center">
+          don't have an account yet?
+        </div>
         <div>
           <Link to="/sign-up">
             <div className="flex justify-center items-center mt-6">
-              <button
-                className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"
-              >
+              <button className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark">
                 sign up
               </button>
             </div>

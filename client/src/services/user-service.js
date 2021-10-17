@@ -12,12 +12,12 @@ const getAll = () => {
   return http.get("/get");
 };
 
-const update = (newData) => {
-  return http.put("/update", newData);
+const update = (newData, token) => {
+  return http.put("/update", newData, { headers: { authorization: token } });
 };
 
-const remove = (id) => {
-  return http.delete(`/sign-out/${id}`);
+const remove = (id, token) => {
+  return http.delete(`/delete/${id}`, { headers: { authorization: token } });
 };
 
 const UserService = {

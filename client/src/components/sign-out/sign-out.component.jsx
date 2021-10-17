@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   setCurrentUser,
@@ -9,13 +9,14 @@ import { toast } from "react-toastify";
 import UserService from "../../services/user-service";
 
 const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
+  const history = useHistory();
   const clearCurrentUser = () => {
     setCurrentUser(null);
   };
   const handleDelete = async () => {
+    clearCurrentUser();
     try {
-      clearCurrentUser();
-      await UserService.remove(currentUser.id);
+      await UserService.remove(currentUser.id, currentUser.token);
       const leaderboard = await UserService.getAll();
       setLeaderboard(leaderboard.data);
       toast.info("deleted 🏁", {
@@ -24,6 +25,8 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
         autoClose: 2000,
       });
     } catch (error) {
+      
+      history.push("/sign-in");
       toast.error(error.response.data.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",

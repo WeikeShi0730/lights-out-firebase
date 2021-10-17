@@ -1,11 +1,12 @@
 const express = require("express");
 const path = require("path");
+require("dotenv").config();
 const app = express();
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   const cors = require("cors");
   var corsOptions = {
-    origin: "*",
+    origin: "http://localhost:3000",
   };
   app.use(cors(corsOptions));
 }
