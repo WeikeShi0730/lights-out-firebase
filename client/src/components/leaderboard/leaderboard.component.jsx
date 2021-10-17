@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { setLeaderboard } from "../../redux/actions/user.action";
+import { setLeaderboard } from "../../redux/actions/leaderboard.action";
 import UserService from "../../services/user-service";
 
 import IndividualPlayer from "../individual-player/individual-player.component";
@@ -116,7 +116,7 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
 };
 
 const mapStateToProps = (state) => ({
-  leaderboard: state.user.leaderboard,
+  leaderboard: state.leaderboard.leaderboard,
   currentUser: state.user.currentUser,
 });
 

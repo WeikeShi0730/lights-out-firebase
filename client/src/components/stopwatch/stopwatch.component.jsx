@@ -4,11 +4,8 @@ import { useHistory } from "react-router-dom";
 import UserService from "../../services/user-service";
 import { toast } from "react-toastify";
 import "./stopwatch.styles.scss";
-
-import {
-  setCurrentUser,
-  setLeaderboard,
-} from "../../redux/actions/user.action";
+import { setCurrentUser } from "../../redux/actions/user.action";
+import { setLeaderboard } from "../../redux/actions/leaderboard.action";
 
 const Stopwatch = ({
   currentUser,

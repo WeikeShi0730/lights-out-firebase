@@ -1,8 +1,7 @@
-import { SET_CURRENT_USER, SET_LEADERBOARD } from "../actions/types";
+import { SET_CURRENT_USER } from "../actions/types";
 
 const initialState = {
   currentUser: null,
-  leaderboard: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -12,11 +11,6 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: payload,
-      };
-    case SET_LEADERBOARD:
-      return {
-        ...state,
-        leaderboard: payload,
       };
     default:
       return state;

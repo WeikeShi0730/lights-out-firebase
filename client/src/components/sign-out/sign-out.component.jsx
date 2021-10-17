@@ -1,10 +1,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  setCurrentUser,
-  setLeaderboard,
-} from "../../redux/actions/user.action";
+import { setCurrentUser } from "../../redux/actions/user.action";
+import { setLeaderboard } from "../../redux/actions/leaderboard.action";
 import { toast } from "react-toastify";
 import UserService from "../../services/user-service";
 
@@ -25,7 +23,6 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
         autoClose: 2000,
       });
     } catch (error) {
-      
       history.push("/sign-in");
       toast.error(error.response.data.message, {
         position: toast.POSITION.TOP_CENTER,
