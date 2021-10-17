@@ -8,25 +8,17 @@ import IndividualPlayer from "../individual-player/individual-player.component";
 const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   const fecthData = async () => {
     try {
-      console.log("IN HERE");
-      // const fetchedData = await UserService.getAll();
-      // const data = fetchedData.data;
-
-      const fetchedData = await fetch("https://f1-lightsout.herokuapp.com/api/get");
-      console.log("fetchedData", fetchedData);
+      const fetchedData = await UserService.getAll();
       const data = fetchedData.data;
-      // const json = await fetchedData.json();
-      // const data = json;
-
-      
-      console.log("data", data);
       setLeaderboard(data);
     } catch (error) {
       console.error(error.response.data.message);
     }
   };
+
   useEffect(() => {
     fecthData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dot = () => {
@@ -38,7 +30,6 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   };
 
   const leaderboardList = () => {
-    console.log("???????????????????");
     const numberOfUser = leaderboard.length;
     const numberOfUsersDisplay =
       leaderboard.length > 10 ? 10 : leaderboard.length;
