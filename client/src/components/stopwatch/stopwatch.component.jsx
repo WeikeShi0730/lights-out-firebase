@@ -178,41 +178,23 @@ const Stopwatch = ({
 
   return (
     <Fragment>
-      <h3 className="notice text-sm lg:text-md">
+      <h3 className="text-center text-sm lg:text-md">
         tap/click when you are ready to race, and tap again when the lights go
         out
       </h3>
       <div className="text-xl time">
         {jump ? <div>jump start</div> : <div>{formatTimer(timer)}</div>}
       </div>
-
-      <div className="footer">
+      <div className="text-center">
         <div className="text-sm md:text-base lg:text-lg">
           best:{" "}
-          {currentBest
-            ? currentBest !== Number.MAX_VALUE
-              ? currentBest.toFixed(3) + " s"
-              : "no data"
-            : "please sign in to record time!"}
-        </div>
-        <div className="text-xs md:text-sm">
-          create by{" "}
-          <a
-            className="flex justify-center items-center font-black"
-            href="https://www.linkedin.com/in/weike-shi/"
-          >
-            @ weike shi
-            <img src="/icons8-linkedin-24.png" alt="linkedin" />
-          </a>
-        </div>
-        <div className="text-xs md:text-sm">
-          <a
-            className="flex justify-center items-center font-black"
-            href="https://github.com/WeikeShi0730/lights-out-node"
-          >
-            @ github
-            <img src="/icons8-github-24.png" alt="github" />
-          </a>
+          <span className="font-black">
+            {currentBest
+              ? currentBest !== Number.MAX_VALUE
+                ? currentBest.toFixed(3) + " s"
+                : "no data"
+              : "please sign in to record time!"}
+          </span>
         </div>
       </div>
     </Fragment>

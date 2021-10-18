@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./components/header/header.component";
 import Main from "./pages/main/main.component";
+import Footer from "./components/footer/footer.component";
 import SignIn from "./components/sign-in/sign-in.component";
 import SignUp from "./components/sign-up/sign-up.component";
 import SignOut from "./components/sign-out/sign-out.component";
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/sign-up" component={SignUp} />
         <Route path="/sign-out/:id" component={SignOut} />
       </Switch>
+      <Footer />
     </div>
   );
 }
