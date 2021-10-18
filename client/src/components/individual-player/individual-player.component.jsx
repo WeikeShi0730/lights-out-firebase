@@ -31,7 +31,7 @@ const IndividualPlayer = ({ currentUser, user, ranking }) => {
       </div>
       <div className="grid item-center justify-items-end col-span-3 mx-5">
         {user.timer !== Number.MAX_VALUE
-          ? user.timer.toPrecision(3) + " s"
+          ? user.timer.toFixed(3) + " s"
           : "no data"}
       </div>
     </div>

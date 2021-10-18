@@ -188,12 +188,12 @@ const Stopwatch = ({
 
       <div className="footer">
         <div className="text-sm md:text-base lg:text-lg">
-          best:
+          best:{" "}
           {currentBest
             ? currentBest !== Number.MAX_VALUE
-              ? currentBest.toPrecision(3) + " s"
-              : " no data"
-            : " please sign in to record time!"}
+              ? currentBest.toFixed(3) + " s"
+              : "no data"
+            : "please sign in to record time!"}
         </div>
         <div className="text-xs md:text-sm">
           create by{" "}
