@@ -36,7 +36,7 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
       <Link to="/">
         <button
           onClick={clearCurrentUser}
-          className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"
+          className="text-xs md:text-sm lg:text-base bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-green-dark"
         >
           sign out
         </button>
@@ -44,7 +44,7 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
       <Link to="/">
         <button
           onClick={handleDelete}
-          className="bg-red-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark"
+          className="text-xs md:text-sm lg:text-base bg-red-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-green-dark"
         >
           delete acount
         </button>

@@ -178,7 +178,7 @@ const Stopwatch = ({
 
   return (
     <Fragment>
-      <h3 className="notice">
+      <h3 className="notice text-sm lg:text-md">
         tap/click when you are ready to race, and tap again when the lights go
         out
       </h3>
@@ -187,7 +187,7 @@ const Stopwatch = ({
       </div>
 
       <div className="footer">
-        <div className="text-lg">
+        <div className="text-sm md:text-base lg:text-lg">
           best:
           {currentBest
             ? currentBest !== Number.MAX_VALUE
@@ -195,7 +195,7 @@ const Stopwatch = ({
               : " no data"
             : " please sign in to record time!"}
         </div>
-        <div className="text-sm">
+        <div className="text-xs md:text-sm">
           create by{" "}
           <a href="https://www.linkedin.com/in/weike-shi/">@Weike Shi</a>
         </div>

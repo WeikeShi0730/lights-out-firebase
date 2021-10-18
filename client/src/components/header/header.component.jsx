@@ -9,14 +9,14 @@ const Header = ({ currentUser }) => {
         <div className="flex items-center flex-shrink-0 flex-grow text-white mr-6">
           <Link to="/">
             <img
-              className="fill-current xs:mr-2 h-8"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png"
+              className="fill-current xs:mr-2 h-6 sm:h-8 md:h-10 lg:h-12"
+              src="/header.png"
               alt="F1"
             />
           </Link>
         </div>
 
-        <div className="block lg:flex lg:items-center lg:w-auto">
+        <div className="block text-xs md:text-sm lg:text-base lg:flex lg:items-center lg:w-auto">
           {currentUser ? (
             <Link to={`/sign-out/${currentUser.id}`}>
               <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">

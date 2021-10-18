@@ -105,9 +105,9 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
 
   return (
     <div>
-      <h1 className="flex justify-center text-2xl">leaderboard</h1>
-      <div className="grid gap-y-8">
-        <div className="ml-5 mr-5">
+      <h1 className="flex justify-center text-sm md:text-base lg:text-lg">leaderboard</h1>
+      <div className="grid">
+        <div className="text-xs sm:text-sm lg:text-base ml-5 mr-5">
           {leaderboard ? leaderboardList() : "Loading..."}
         </div>
       </div>

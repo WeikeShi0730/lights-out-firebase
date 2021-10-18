@@ -54,19 +54,19 @@ const SignUp = ({ setCurrentUser }) => {
   };
   return (
     <React.Fragment>
-      <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg m-auto mt-10 bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-primary mt-4 mb-12 text-center">
+      <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg m-auto mt-10 bg-white rounded-lg border border-primaryBorder shadow-default py-8 px-10">
+        <h1 className="text-base lg:text-lg font-medium text-primary mt-4 mb-12 text-center">
           sign up 🔐
         </h1>
 
         <form onSubmit={handleSignUpFormSubmit}>
           <div>
-            <label>username</label>
+            <label className='text-sm md:text-base'>username</label>
             <input
               required
               name="name"
               type="text"
-              className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
+              className="text-xs md:text-md w-full p-2 text-primary border rounded-md outline-none transition duration-150 ease-in-out mb-4"
               id="name"
               placeholder="your username"
               onChange={handleChange}
@@ -74,24 +74,24 @@ const SignUp = ({ setCurrentUser }) => {
             />
           </div>
           <div>
-            <label>country</label>
+            <label className='text-sm md:text-base'>country</label>
             <Select
               required
               name="country"
               id="country"
               options={options}
               value={value}
-              className="w-full mb-4"
+              className="text-xs md:text-md w-full text-primary outline-none transition duration-150 ease-in-out mb-4"
               onChange={handleCountryChange}
             />
           </div>
           <div>
-            <label>password</label>
+            <label className='text-sm md:text-base'>password</label>
             <input
               required
               name="password"
               type="password"
-              className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
+              className="text-xs md:text-md w-full p-2 text-primary border rounded-md outline-none transition duration-150 ease-in-out mb-4"
               id="password"
               placeholder="your password"
               onChange={handleChange}
@@ -99,20 +99,20 @@ const SignUp = ({ setCurrentUser }) => {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-gray-900">
+            <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-gray-900">
               sign up
             </button>
           </div>
         </form>
       </div>
       <div className="w-full max-w-md m-auto mt-4">
-        <div className="flex justify-center items-center">
+        <div className="text-base lg:text-lg flex justify-center items-center">
           already have an account?
         </div>
         <div>
           <Link to="/sign-in">
             <div className="flex justify-center items-center mt-6">
-              <button className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark">
+              <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-green-dark">
                 sign in
               </button>
             </div>

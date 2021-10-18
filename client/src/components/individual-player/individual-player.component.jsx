@@ -17,7 +17,7 @@ const IndividualPlayer = ({ currentUser, user, ranking }) => {
   };
   return (
     <div
-      className={`h-14 grid gap-x-2 grid-cols-7 my-2 content-center ${
+      className={`h-8 md:h-10 lg:h-12 grid gap-x-2 grid-cols-7 my-2 content-center ${
         currentUser && currentUser.id === user.id ? "bg-gray-300 rounded " : ""
       }`}
       key={user.id}

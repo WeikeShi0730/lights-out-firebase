@@ -38,31 +38,31 @@ const SignIn = ({ setCurrentUser }) => {
 
   return (
     <React.Fragment>
-      <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg m-auto mt-10 bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16">
-        <div className="text-2xl font-medium text-primary mt-4 mb-12 text-center">
+      <div className="max-w-xs md:max-w-md lg:max-w-lg m-auto mt-10 bg-white rounded-lg border border-primaryBorder shadow-default py-8 px-10">
+        <div className="text-base lg:text-lg font-medium text-primary mt-4 mb-12 text-center">
           log in to your account 🔐
         </div>
 
         <form onSubmit={handleSubmit}>
           <div>
-            <label>username</label>
+            <label className='text-sm md:text-base'>username</label>
             <input
               required
               name="name"
               type="text"
-              className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+              className="w-full p-2 text-xs md:text-md text-primary border rounded-md outline-none transition duration-150 ease-in-out mb-4"
               id="name"
               placeholder="your username"
               onChange={handleChange}
             />
           </div>
           <div>
-            <label>password</label>
+            <label className='text-sm md:text-base'>password</label>
             <input
               required
               name="password"
               type="password"
-              className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
+              className="w-full p-2 text-xs md:text-md text-primary border rounded-md outline-none transition duration-150 ease-in-out mb-4"
               id="password"
               placeholder="your password"
               onChange={handleChange}
@@ -70,20 +70,20 @@ const SignIn = ({ setCurrentUser }) => {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark">
+            <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-green-dark">
               sign in
             </button>
           </div>
         </form>
       </div>
       <div className="w-full max-w-md m-auto mt-4">
-        <div className="flex justify-center items-center">
+        <div className="text-base lg:text-lg flex justify-center items-center">
           don't have an account yet?
         </div>
         <div>
           <Link to="/sign-up">
             <div className="flex justify-center items-center mt-6">
-              <button className="bg-gray-800 py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark">
+              <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-green-dark">
                 sign up
               </button>
             </div>
