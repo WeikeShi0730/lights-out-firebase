@@ -36,9 +36,6 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
     const currentUserRanking = currentUser
       ? leaderboard.findIndex((user) => user.id === currentUser.id) + 1
       : -1;
-    console.log(leaderboard);
-    console.log(currentUser.id)
-    console.log(currentUserRanking);
     const lastPlace = leaderboard[leaderboard.length - 1];
     const lastPlaceRanking = leaderboard.length;
 
