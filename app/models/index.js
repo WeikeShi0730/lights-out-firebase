@@ -6,12 +6,12 @@ const config = process.env;
 const sequelize = new Sequelize(config.DATABASE_URL, {
   dialect: config.DIALECT,
   operatorsAliases: false,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true,
-  //     rejectUnauthorized: false,
-  //   },
-  // },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
 });
 
 const db = {};
