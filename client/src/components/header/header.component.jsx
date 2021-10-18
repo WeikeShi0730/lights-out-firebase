@@ -16,7 +16,7 @@ const Header = ({ currentUser }) => {
           </Link>
         </div>
 
-        <div className="block text-xs md:text-sm lg:text-base lg:flex lg:items-center lg:w-auto">
+        <div className="block text-sm md:text-base lg:text-lg lg:flex lg:items-center lg:w-auto">
           {currentUser ? (
             <Link to={`/sign-out/${currentUser.id}`}>
               <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">

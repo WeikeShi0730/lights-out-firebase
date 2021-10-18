@@ -197,7 +197,22 @@ const Stopwatch = ({
         </div>
         <div className="text-xs md:text-sm">
           create by{" "}
-          <a href="https://www.linkedin.com/in/weike-shi/">@Weike Shi</a>
+          <a
+            className="flex justify-center items-center font-black"
+            href="https://www.linkedin.com/in/weike-shi/"
+          >
+            @ weike shi
+            <img src="/icons8-linkedin-24.png" alt="linkedin" />
+          </a>
+        </div>
+        <div className="text-xs md:text-sm">
+          <a
+            className="flex justify-center items-center font-black"
+            href="https://github.com/WeikeShi0730/lights-out-node"
+          >
+            @ github
+            <img src="/icons8-github-24.png" alt="github" />
+          </a>
         </div>
       </div>
     </Fragment>
