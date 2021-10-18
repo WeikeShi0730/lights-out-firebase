@@ -11,8 +11,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   app.use(cors(corsOptions));
 }
 
-app.use(cors(corsOptions));
-
 app.use(express.static(path.resolve(__dirname, "client/build")));
 
 // parse requests of content-type - application/json
