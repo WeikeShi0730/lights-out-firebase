@@ -2,7 +2,7 @@ import React from "react";
 import "./main.styles.scss";
 
 import Lights from "../../components/lights/lights.component";
-import ClickInside from "../../components/click-inside/click-inside.component";
+import ClickInside from "../../components/click-inside/click-inside.componnet";
 import Leaderboard from "../../components/leaderboard/leaderboard.component";
 
 const Main = () => {
