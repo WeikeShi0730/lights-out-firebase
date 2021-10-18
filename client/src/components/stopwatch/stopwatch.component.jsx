@@ -44,7 +44,7 @@ const Stopwatch = ({
   };
 
   const addRandom = () => {
-    const random = Math.floor((Math.random() * 3 + 1) * 1000);
+    const random = Math.floor((Math.random() * 3 + 2) * 1000);
     setTimeOut(
       setTimeout(() => {
         setOn(true);

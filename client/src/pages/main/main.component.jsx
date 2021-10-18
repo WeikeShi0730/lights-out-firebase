@@ -15,7 +15,7 @@ const Main = () => {
           </ClickInside>
         </div>
 
-        <div className="m-auto justify-center lg:w-full lg:p-2 lg:m-0">
+        <div className="w-8/12 sm:w-6/12 md:w-5/12 lg:w-full xl:w-8/12 justify-self-center">
           <Leaderboard />
         </div>
       </div>
