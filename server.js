@@ -3,13 +3,18 @@ const path = require("path");
 require("dotenv").config();
 const app = express();
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  const cors = require("cors");
-  var corsOptions = {
-    origin: "http://localhost:3000",
-  };
-  app.use(cors(corsOptions));
-}
+// if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+//   const cors = require("cors");
+//   var corsOptions = {
+//     origin: "*",
+//   };
+//   app.use(cors(corsOptions));
+// }
+const cors = require("cors");
+var corsOptions = {
+  origin: "*",
+};
+app.use(cors(corsOptions));
 
 app.use(express.static(path.resolve(__dirname, "client/build")));
 
