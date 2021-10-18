@@ -18,7 +18,7 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
 
   useEffect(() => {
     fecthData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const dot = () => {
@@ -105,11 +105,11 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
 
   return (
     <div>
-      <h1 className="flex justify-center text-sm md:text-base lg:text-lg">leaderboard</h1>
-      <div className="grid">
-        <div className="text-xs sm:text-sm lg:text-base ml-5 mr-5">
-          {leaderboard ? leaderboardList() : "Loading..."}
-        </div>
+      <h1 className="flex justify-center text-sm md:text-base lg:text-lg">
+        leaderboard
+      </h1>
+      <div className="text-xs sm:text-sm lg:text-base">
+        {leaderboard ? leaderboardList() : "Loading..."}
       </div>
     </div>
   );
