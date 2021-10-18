@@ -14,7 +14,6 @@ const Main = () => {
             <Lights />
           </ClickInside>
         </div>
-
         <div className="w-9/12 sm:w-6/12 md:w-5/12 lg:w-full xl:w-8/12 justify-self-center">
           <Leaderboard />
         </div>
