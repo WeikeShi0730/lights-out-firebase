@@ -16,6 +16,12 @@ const update = (newData, token) => {
   return http.put("/update", newData, { headers: { authorization: token } });
 };
 
+const deleteRecord = (id, newData, token) => {
+  return http.put(`/delete-record/${id}`, newData, {
+    headers: { authorization: token },
+  });
+};
+
 const remove = (id, token) => {
   return http.delete(`/delete/${id}`, { headers: { authorization: token } });
 };
@@ -25,6 +31,7 @@ const UserService = {
   signIn,
   getAll,
   update,
+  deleteRecord,
   remove,
 };
 export default UserService;

@@ -154,7 +154,6 @@ const Stopwatch = ({
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",
         });
-        console.error(error.response.data.message);
       }
     }
   };

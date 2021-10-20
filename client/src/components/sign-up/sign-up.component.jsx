@@ -99,7 +99,7 @@ const SignUp = ({ setCurrentUser }) => {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-gray-900">
+            <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border focus:outline-none">
               sign up
             </button>
           </div>
@@ -112,7 +112,7 @@ const SignUp = ({ setCurrentUser }) => {
         <div>
           <Link to="/sign-in">
             <div className="flex justify-center items-center mt-6">
-              <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border border-green focus:outline-none focus:border-green-dark">
+              <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border focus:outline-none">
                 sign in
               </button>
             </div>

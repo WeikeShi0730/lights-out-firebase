@@ -18,6 +18,9 @@ module.exports = (app) => {
   // Update a User with id
   router.put("/update", authenticateToken, users.update);
 
+  // Update a User with id
+  router.put("/delete-record/:id", authenticateToken, users.deteleRecord);
+
   // Delete a User with id
   router.delete("/delete/:id", authenticateToken, users.delete);
 };

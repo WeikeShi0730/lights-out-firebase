@@ -132,6 +132,21 @@ exports.delete = async (req, res) => {
   }
 };
 
+exports.deteleRecord= async (req, res) => {
+  const id = req.params.id;
+  try {
+    await User.update(req.body, {
+      where: { id: id },
+    });
+    res.status(200).send({ message: "user record deleted successfully" });
+  } catch (error) {
+    res.status(500).send({
+      message: "error deleting record with id=" + id,
+    });
+  }
+};
+
+
 //private
 const findExistName = async (newName) => {
   const user = await User.findAll({
