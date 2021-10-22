@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { setCurrentUser } from "../../redux/actions/user.action";
+import { signInWithGoogle } from "../../firebase/firebase.utils";
 
 const SignIn = ({ setCurrentUser }) => {
   const [signInInfo, setSignInInfo] = useState({
@@ -70,8 +71,18 @@ const SignIn = ({ setCurrentUser }) => {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border focus:outline-none">
+            <button
+              type="submit"
+              className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border focus:outline-none"
+            >
               sign in
+            </button>
+            <button
+              type="button"
+              onClick={signInWithGoogle}
+              className="text-xs md:text-sm bg-gray-800 py-2 px-4 text-white rounded border focus:outline-none"
+            >
+              sign in with google
             </button>
           </div>
         </form>
