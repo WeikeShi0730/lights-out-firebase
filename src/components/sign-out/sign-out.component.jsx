@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/actions/user.action";
 import { setLeaderboard } from "../../redux/actions/leaderboard.action";
 import { toast } from "react-toastify";
-import UserService from "../../services/user-service";
 
 const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
   const history = useHistory();
@@ -14,8 +13,9 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
   const handleDeleteAccount = async () => {
     clearCurrentUser();
     try {
-      await UserService.remove(currentUser.id, currentUser.token);
-      const leaderboard = await UserService.getAll();
+      //await UserService.remove(currentUser.id, currentUser.token);
+      //const leaderboard = await UserService.getAll();
+      const leaderboard = null
       setLeaderboard(leaderboard.data);
       toast.info("deleted 🏁", {
         position: toast.POSITION.TOP_CENTER,
@@ -38,7 +38,7 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
       updatedUser["timer"] = Number.MAX_VALUE;
       const { token, ...updatedUserNoToken } = updatedUser;
       setCurrentUser(updatedUser);
-      await UserService.deleteRecord(currentUser.id, updatedUserNoToken, token);
+      //await UserService.deleteRecord(currentUser.id, updatedUserNoToken, token);
       toast.success("user record deleted successfully", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",

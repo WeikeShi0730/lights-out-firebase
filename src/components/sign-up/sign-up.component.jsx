@@ -3,7 +3,6 @@ import Select from "react-select";
 import countryList from "../../assets/country-list.json";
 import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import UserService from "../../services/user-service";
 import { toast } from "react-toastify";
 import { setCurrentUser } from "../../redux/actions/user.action";
 
@@ -35,7 +34,8 @@ const SignUp = ({ setCurrentUser }) => {
   const handleSignUpFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await UserService.signUp(signUpInfo);
+      //const res = await UserService.signUp(signUpInfo);
+      const res = null;
       const currentUser = res.data;
       setCurrentUser(currentUser);
       history.push("/");
@@ -61,7 +61,7 @@ const SignUp = ({ setCurrentUser }) => {
 
         <form onSubmit={handleSignUpFormSubmit}>
           <div>
-            <label className='text-sm md:text-base'>username</label>
+            <label className="text-sm md:text-base">username</label>
             <input
               required
               name="name"
@@ -74,7 +74,7 @@ const SignUp = ({ setCurrentUser }) => {
             />
           </div>
           <div>
-            <label className='text-sm md:text-base'>country</label>
+            <label className="text-sm md:text-base">country</label>
             <Select
               required
               name="country"
@@ -86,7 +86,7 @@ const SignUp = ({ setCurrentUser }) => {
             />
           </div>
           <div>
-            <label className='text-sm md:text-base'>password</label>
+            <label className="text-sm md:text-base">password</label>
             <input
               required
               name="password"

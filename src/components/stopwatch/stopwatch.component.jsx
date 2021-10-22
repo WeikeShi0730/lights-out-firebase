@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import UserService from "../../services/user-service";
 import { toast } from "react-toastify";
 import "./stopwatch.styles.scss";
 import { setCurrentUser } from "../../redux/actions/user.action";
@@ -128,7 +127,8 @@ const Stopwatch = ({
   };
 
   const updateLeaderboard = async () => {
-    const leaderboard = await UserService.getAll();
+    //const leaderboard = await UserService.getAll();
+    const leaderboard = null;
     setLeaderboard(leaderboard.data);
   };
 
@@ -141,7 +141,7 @@ const Stopwatch = ({
         updatedUser["timer"] = currentTimer;
         const { token, ...updatedUserNoToken } = updatedUser;
         setCurrentUser(updatedUser);
-        await UserService.update(updatedUserNoToken, token);
+        //await UserService.update(updatedUserNoToken, token);
         toast.success("new personal record 🎉", {
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { setLeaderboard } from "../../redux/actions/leaderboard.action";
-import UserService from "../../services/user-service";
 
 import IndividualPlayer from "../individual-player/individual-player.component";
 
 const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
   const fecthData = async () => {
     try {
-      const fetchedData = await UserService.getAll();
-      const data = fetchedData.data;
+      //const fetchedData = await UserService.getAll();
+      const fetchedData = null;
+      const data = fetchedData;
       setLeaderboard(data);
     } catch (error) {
       console.error(error.response.data.message);
