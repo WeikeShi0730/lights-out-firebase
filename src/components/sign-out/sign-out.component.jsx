@@ -3,19 +3,21 @@ import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/actions/user.action";
 import { setLeaderboard } from "../../redux/actions/leaderboard.action";
+import { signOutGoogle } from "../../firebase/firebase.utils";
 import { toast } from "react-toastify";
 
 const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
   const history = useHistory();
   const clearCurrentUser = () => {
     setCurrentUser(null);
+    signOutGoogle();
   };
   const handleDeleteAccount = async () => {
     clearCurrentUser();
     try {
       //await UserService.remove(currentUser.id, currentUser.token);
       //const leaderboard = await UserService.getAll();
-      const leaderboard = null
+      const leaderboard = null;
       setLeaderboard(leaderboard.data);
       toast.info("deleted 🏁", {
         position: toast.POSITION.TOP_CENTER,

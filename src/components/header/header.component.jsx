@@ -6,7 +6,6 @@ import { auth } from "../../firebase/firebase.utils";
 
 const Header = ({ currentUser }) => {
   const [user] = useAuthState(auth);
-
   return (
     <div>
       <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 ">
@@ -22,12 +21,11 @@ const Header = ({ currentUser }) => {
 
         <div className="block text-sm md:text-base lg:text-lg lg:flex lg:items-center lg:w-auto">
           {user ? (
-            // <Link to={`/sign-out/${currentUser.id}`}>
-            //   <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">
-            //     {currentUser.name}
-            //   </button>
-            // </Link>
-            <div>hello</div>
+            <Link to={`/sign-out/${user.uid}`}>
+              <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">
+                {user.displayName}
+              </button>
+            </Link>
           ) : (
             <Link to="/sign-in">
               <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">
