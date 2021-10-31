@@ -3,14 +3,16 @@ import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/actions/user.action";
 import { setLeaderboard } from "../../redux/actions/leaderboard.action";
-import { signOutGoogle } from "../../firebase/firebase.utils";
+import { auth, signOutGoogle } from "../../firebase/firebase.utils";
 import { toast } from "react-toastify";
 
 const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
   const history = useHistory();
   const clearCurrentUser = () => {
-    setCurrentUser(null);
-    signOutGoogle();
+    if (auth.currentUser) {
+      setCurrentUser(null);
+      signOutGoogle();
+    }
   };
   const handleDeleteAccount = async () => {
     clearCurrentUser();
