@@ -49,7 +49,7 @@ const SignUp = ({ setCurrentUser }) => {
         autoClose: 2000,
       });
     } catch (error) {
-      toast.error("Error creating the profile", {
+      toast.error("error creating the profile", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });

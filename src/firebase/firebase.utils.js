@@ -2,13 +2,17 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  setDoc,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -44,10 +48,25 @@ export const signUpWithEmailAndPassword = async (signUpInfo) => {
       displayName: signUpInfo.name,
     });
     const { password, ...signUpInfoWithoutPassword } = signUpInfo;
-    await createUserFirestore(signUpInfoWithoutPassword);             // what if only this step threw error?????
+    await createUserFirestore(signUpInfoWithoutPassword); // what if only this step threw error?????
     return signUpInfoWithoutPassword;
   } catch (error) {
     console.error("Error creating the profile: ", error);
+    throw error;
+  }
+};
+
+export const signInWithEmail = async (signInInfo) => {
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      signInInfo.email,
+      signInInfo.password
+    );
+    const currentUser = await getUserFirestore(signInInfo);
+    return currentUser;
+  } catch (error) {
+    console.error("Error signing: ", error);
     throw error;
   }
 };
@@ -61,11 +80,26 @@ export const signOutGoogle = async () => {
 };
 
 /**************** Firestore ****************/
-export const createUserFirestore = async (user) => {
+const createUserFirestore = async (user) => {
   try {
-    await addDoc(collection(db, "users"), user);
+    await setDoc(doc(db, "users", user.email), user);
   } catch (error) {
     console.error("Error adding document: ", error);
+    throw error;
+  }
+};
+
+const getUserFirestore = async (user) => {
+  try {
+    const docRef = doc(db, "users", user.email);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      throw new Error("no user found");
+    }
+  } catch (error) {
+    console.error("error signing in: ", error);
     throw error;
   }
 };

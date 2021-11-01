@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import { signInWithEmail } from "../../firebase/firebase.utils";
 import { setCurrentUser } from "../../redux/actions/user.action";
 
 const SignIn = ({ setCurrentUser }) => {
   const [signInInfo, setSignInInfo] = useState({
-    name: "",
+    email: "",
     password: "",
   });
   const history = useHistory();
@@ -14,17 +15,15 @@ const SignIn = ({ setCurrentUser }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      //const res = await UserService.signIn(signInInfo);
-      const res = null;
-      const currentUser = res.data;
+      const currentUser = await signInWithEmail(signInInfo);
       setCurrentUser(currentUser);
       history.push("/");
     } catch (error) {
-      toast.error(error.response.data.message, {
+      toast.error("error signing in", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error(error.response.data.message);
+      console.error("error signing in: ", error);
     }
   };
 
@@ -45,14 +44,14 @@ const SignIn = ({ setCurrentUser }) => {
 
         <form onSubmit={handleSubmit}>
           <div>
-            <label className="text-sm md:text-base">username</label>
+            <label className="text-sm md:text-base">email</label>
             <input
               required
-              name="name"
-              type="text"
+              name="email"
+              type="email"
               className="w-full p-2 text-xs md:text-md text-primary border rounded-md outline-none transition duration-150 ease-in-out mb-4"
-              id="name"
-              placeholder="your username"
+              id="email"
+              placeholder="your email"
               onChange={handleChange}
             />
           </div>
@@ -76,7 +75,6 @@ const SignIn = ({ setCurrentUser }) => {
             >
               sign in
             </button>
-          
           </div>
         </form>
       </div>
@@ -98,8 +96,4 @@ const SignIn = ({ setCurrentUser }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
-
-export default connect(mapStateToProps, { setCurrentUser })(SignIn);
+export default connect(null, { setCurrentUser })(SignIn);
