@@ -33,15 +33,6 @@ export const auth = getAuth();
 const db = getFirestore();
 
 /************** Authentication **************/
-export const signInWithGoogle = async () => {
-  const provider = new GoogleAuthProvider();
-  try {
-    await signInWithPopup(auth, provider);
-  } catch (error) {
-    console.error("Error signing in with google: ", error);
-  }
-};
-
 export const signUpWithEmailAndPassword = async (signUpInfo) => {
   try {
     await createUserWithEmailAndPassword(
