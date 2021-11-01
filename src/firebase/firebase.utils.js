@@ -4,8 +4,11 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  updateProfile,
   signOut,
 } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -24,16 +27,37 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
-
+// Initialize authentication
 export const auth = getAuth();
-//export const firestore = firebase.firestore();
+// Initialize firestore
+const db = getFirestore();
 
+/************** Authentication **************/
 export const signInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   try {
     await signInWithPopup(auth, provider);
   } catch (error) {
-    console.error(error);
+    console.error("Error signing in with google: ", error);
+  }
+};
+
+export const signUpWithEmailAndPassword = async (signUpInfo) => {
+  try {
+    await createUserWithEmailAndPassword(
+      auth,
+      signUpInfo.email,
+      signUpInfo.password
+    );
+    await updateProfile(auth.currentUser, {
+      displayName: signUpInfo.name,
+    });
+    const { password, ...signUpInfoWithoutPassword } = signUpInfo;
+    await createUserFirestore(signUpInfoWithoutPassword);             // what if only this step threw error?????
+    return signUpInfoWithoutPassword;
+  } catch (error) {
+    console.error("Error creating the profile: ", error);
+    throw error;
   }
 };
 
@@ -41,6 +65,16 @@ export const signOutGoogle = async () => {
   try {
     await signOut(auth);
   } catch (error) {
-    console.error(error);
+    console.error("Error signing out: ", error);
+  }
+};
+
+/**************** Firestore ****************/
+export const createUserFirestore = async (user) => {
+  try {
+    await addDoc(collection(db, "users"), user);
+  } catch (error) {
+    console.error("Error adding document: ", error);
+    throw error;
   }
 };
