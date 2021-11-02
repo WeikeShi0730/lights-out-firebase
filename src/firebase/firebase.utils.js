@@ -6,11 +6,15 @@ import {
   updateProfile,
   signInWithEmailAndPassword,
   signOut,
+  deleteUser,
 } from "firebase/auth";
 import {
   getFirestore,
+  collection,
   setDoc,
   getDoc,
+  deleteDoc,
+  updateDoc,
   doc,
 } from "firebase/firestore";
 
@@ -79,6 +83,17 @@ export const signOutGoogle = async () => {
   }
 };
 
+export const deleteUserAccount = async () => {
+  try {
+    const user = auth.currentUser;
+    await deleteUser(user);
+    await deleteUserFirestore(user.email);
+  } catch (error) {
+    console.error("Error deleting account: ", error);
+    throw error;
+  }
+};
+
 /**************** Firestore ****************/
 const createUserFirestore = async (user) => {
   try {
@@ -100,6 +115,34 @@ const getUserFirestore = async (user) => {
     }
   } catch (error) {
     console.error("error signing in: ", error);
+    throw error;
+  }
+};
+
+export const getUsersRef = () => {
+  const usersRef = collection(db, "users");
+  console.log("!!!!!!!!!!!!!!!!!!!", usersRef);
+  return usersRef;
+};
+
+const deleteUserFirestore = async (userEmail) => {
+  try {
+    await deleteDoc(doc(db, "users", userEmail));
+  } catch (error) {
+    console.error("Error deleting account: ", error);
+    throw error;
+  }
+};
+
+export const deleteUserRecord = async () => {
+  try {
+    const userEmail = auth.currentUser.email;
+    const userRef = doc(db, "users", userEmail);
+    await updateDoc(userRef, {
+      timer: Number.MAX_VALUE,
+    });
+  } catch (error) {
+    console.error("Error deleting user record: ", error);
     throw error;
   }
 };

@@ -1,59 +1,58 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/actions/user.action";
-import { setLeaderboard } from "../../redux/actions/leaderboard.action";
-import { auth, signOutGoogle } from "../../firebase/firebase.utils";
+import {
+  auth,
+  signOutGoogle,
+  deleteUserAccount,
+  deleteUserRecord,
+} from "../../firebase/firebase.utils";
 import { toast } from "react-toastify";
 
-const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
-  const history = useHistory();
-  const clearCurrentUser = () => {
-    if (auth.currentUser) {
-      setCurrentUser(null);
-      signOutGoogle();
+const SignOut = ({ setCurrentUser }) => {
+  const clearCurrentUser = async () => {
+    try {
+      if (auth.currentUser) {
+        setCurrentUser(null);
+        await signOutGoogle();
+      }
+    } catch (error) {
+      console.error("error clear current user", error);
     }
   };
   const handleDeleteAccount = async () => {
     clearCurrentUser();
     try {
-      //await UserService.remove(currentUser.id, currentUser.token);
-      //const leaderboard = await UserService.getAll();
-      const leaderboard = null;
-      setLeaderboard(leaderboard.data);
+      await deleteUserAccount();
       toast.info("deleted 🏁", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
         autoClose: 2000,
       });
     } catch (error) {
-      history.push("/sign-in");
-      toast.error(error.response.data.message, {
+      toast.error("error deleting account", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error(error.response.data.message);
+      console.error("error deleting account", error);
     }
   };
 
   const handleDeleteRecord = async () => {
     try {
-      let updatedUser = { ...currentUser };
-      updatedUser["timer"] = Number.MAX_VALUE;
-      const { token, ...updatedUserNoToken } = updatedUser;
-      setCurrentUser(updatedUser);
-      //await UserService.deleteRecord(currentUser.id, updatedUserNoToken, token);
+      await deleteUserRecord();
       toast.success("user record deleted successfully", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
         autoClose: 3000,
       });
-      history.push("/");
     } catch (error) {
-      toast.error(error.response.data.message, {
+      toast.error("error deleting record", {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
+      console.error("error deleting record", error);
     }
   };
 
@@ -89,10 +88,4 @@ const SignOut = ({ currentUser, setCurrentUser, setLeaderboard }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
-
-export default connect(mapStateToProps, { setCurrentUser, setLeaderboard })(
-  SignOut
-);
+export default connect(null, { setCurrentUser })(SignOut);
