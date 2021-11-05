@@ -11,15 +11,15 @@ import {
 import {
   getFirestore,
   collection,
+  query,
   setDoc,
   getDoc,
+  orderBy,
+  onSnapshot,
   deleteDoc,
   updateDoc,
   doc,
 } from "firebase/firestore";
-
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -34,11 +34,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 // Initialize authentication
 export const auth = getAuth();
 // Initialize firestore
-const db = getFirestore();
+const db = getFirestore(app);
 
 /************** Authentication **************/
 export const signUpWithEmailAndPassword = async (signUpInfo) => {
@@ -119,10 +119,18 @@ const getUserFirestore = async (user) => {
   }
 };
 
-export const getUsersRef = () => {
-  const usersRef = collection(db, "users");
-  console.log("!!!!!!!!!!!!!!!!!!!", usersRef);
-  return usersRef;
+const q = query(collection(db, "users"), orderBy("timer"));
+export const getUsers = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      unsubscribe();
+      const users = [];
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data());
+      });
+      resolve(users);
+    }, reject);
+  });
 };
 
 const deleteUserFirestore = async (userEmail) => {

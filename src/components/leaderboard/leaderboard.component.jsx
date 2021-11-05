@@ -1,25 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { setLeaderboard } from "../../redux/actions/leaderboard.action";
-
+import { getUsers } from "../../firebase/firebase.utils";
 import IndividualPlayer from "../individual-player/individual-player.component";
 
-const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
-  const fecthData = async () => {
+const Leaderboard = ({ currentUser }) => {
+  const [leaderboard, setLeaderboard] = useState([]);
+
+  const fetchData = async () => {
     try {
-      //const fetchedData = await UserService.getAll();
-      const fetchedData = null;
-      const data = fetchedData;
-      setLeaderboard(data);
+      const users = await getUsers();
+      setLeaderboard(users);
     } catch (error) {
-      console.error(error.response.data.message);
+      console.error("error fetching data", error);
     }
   };
 
   useEffect(() => {
-    fecthData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    fetchData();
+  });
 
   const dot = () => {
     return (
@@ -116,8 +114,8 @@ const Leaderboard = ({ currentUser, leaderboard, setLeaderboard }) => {
 };
 
 const mapStateToProps = (state) => ({
-  leaderboard: state.leaderboard.leaderboard,
+  //leaderboard: state.leaderboard.leaderboard,
   currentUser: state.user.currentUser,
 });
 
-export default connect(mapStateToProps, { setLeaderboard })(Leaderboard);
+export default connect(mapStateToProps)(Leaderboard);
