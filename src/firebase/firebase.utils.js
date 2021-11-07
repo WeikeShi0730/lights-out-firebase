@@ -119,23 +119,7 @@ const getUserFirestore = async (user) => {
   }
 };
 
-const q = query(collection(db, "users"), orderBy("timer"));
-export const getUsers = () => {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = onSnapshot(
-      q,
-      (querySnapshot) => {
-        unsubscribe();
-        const users = [];
-        querySnapshot.forEach((doc) => {
-          users.push(doc.data());
-        });
-        resolve(users);
-      },
-      reject
-    );
-  });
-};
+export const leaderboardQuery = query(collection(db, "users"), orderBy("timer"));
 
 const deleteUserFirestore = async (userEmail) => {
   try {

@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getUsers } from "../../firebase/firebase.utils";
+//import { getUsers } from "../../firebase/firebase.utils";
 import IndividualPlayer from "../individual-player/individual-player.component";
-import { auth } from "../../firebase/firebase.utils";
+import { auth, leaderboardQuery } from "../../firebase/firebase.utils";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const Leaderboard = () => {
   const [currentUser] = useAuthState(auth);
-  const [leaderboard, setLeaderboard] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const users = await getUsers();
-      setLeaderboard(users);
-    } catch (error) {
-      console.error("error fetching data", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [leaderboard] = useCollectionData(leaderboardQuery);
 
   const dot = () => {
     return (
