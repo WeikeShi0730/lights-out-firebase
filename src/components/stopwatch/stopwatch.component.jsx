@@ -1,18 +1,11 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
-import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { auth } from "../../firebase/firebase.utils";
+import { useAuthState } from "react-firebase-hooks/auth";
 import "./stopwatch.styles.scss";
-import { setCurrentUser } from "../../redux/actions/user.action";
-import { setLeaderboard } from "../../redux/actions/leaderboard.action";
 
-const Stopwatch = ({
-  currentUser,
-  setCurrentUser,
-  setLeaderboard,
-  onLightsChange,
-  clickedInside,
-}) => {
+const Stopwatch = ({ onLightsChange, clickedInside }) => {
   const [on, setOn] = useState(false);
   const [click, setClick] = useState(0);
   const [time, setTime] = useState(0);
@@ -21,6 +14,7 @@ const Stopwatch = ({
   const [intervalTimer, setIntervalTimer] = useState(0);
   const [intervalLights, setIntervalLights] = useState(0);
   const [timeOut, setTimeOut] = useState(0);
+  const [currentUser] = useAuthState(auth);
   const [currentBest, setCurrentBest] = useState(
     currentUser ? currentUser.timer : null
   );
@@ -82,7 +76,7 @@ const Stopwatch = ({
         notifyPlayingWithoutSigningIn();
       }
       await handleBestTime(timer);
-      await updateLeaderboard();
+      //await updateLeaderboard();
     } else {
       console.log("error");
     }
@@ -126,11 +120,11 @@ const Stopwatch = ({
     });
   };
 
-  const updateLeaderboard = async () => {
-    //const leaderboard = await UserService.getAll();
-    const leaderboard = null;
-    setLeaderboard(leaderboard.data);
-  };
+  // const updateLeaderboard = async () => {
+  //   //const leaderboard = await UserService.getAll();
+  //   const leaderboard = null;
+  //   setLeaderboard(leaderboard.data);
+  // };
 
   const handleBestTime = async (currentTimer) => {
     currentTimer = currentTimer / 1000;
@@ -140,7 +134,6 @@ const Stopwatch = ({
         let updatedUser = { ...currentUser };
         updatedUser["timer"] = currentTimer;
         const { token, ...updatedUserNoToken } = updatedUser;
-        setCurrentUser(updatedUser);
         //await UserService.update(updatedUserNoToken, token);
         toast.success("new personal record 🎉", {
           position: toast.POSITION.TOP_CENTER,
@@ -148,7 +141,6 @@ const Stopwatch = ({
           autoClose: 3000,
         });
       } catch (error) {
-        setCurrentUser(null);
         history.push("/sign-in");
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
@@ -199,9 +191,5 @@ const Stopwatch = ({
     </Fragment>
   );
 };
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
-export default connect(mapStateToProps, { setLeaderboard, setCurrentUser })(
-  Stopwatch
-);
+
+export default Stopwatch;

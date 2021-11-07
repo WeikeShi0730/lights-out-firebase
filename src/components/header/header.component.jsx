@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase.utils";
 
-const Header = ({ currentUser }) => {
-  const [user] = useAuthState(auth);
+const Header = () => {
+  const [currentUser] = useAuthState(auth);
   return (
     <div>
       <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 ">
@@ -20,10 +19,10 @@ const Header = ({ currentUser }) => {
         </div>
 
         <div className="block text-sm md:text-base lg:text-lg lg:flex lg:items-center lg:w-auto">
-          {user ? (
-            <Link to={`/sign-out/${user.uid}`}>
+          {currentUser ? (
+            <Link to={`/sign-out/${currentUser.uid}`}>
               <button className="inline-block px-4 py-2 leading-none rounded text-white hover:bg-gray-700 lg:mt-0">
-                {user.displayName}
+                {currentUser.displayName}
               </button>
             </Link>
           ) : (
@@ -39,7 +38,4 @@ const Header = ({ currentUser }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
-export default connect(mapStateToProps)(Header);
+export default Header;

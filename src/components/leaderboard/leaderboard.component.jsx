@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import { getUsers } from "../../firebase/firebase.utils";
 import IndividualPlayer from "../individual-player/individual-player.component";
+import { auth } from "../../firebase/firebase.utils";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const Leaderboard = ({ currentUser }) => {
+const Leaderboard = () => {
+  const [currentUser] = useAuthState(auth);
   const [leaderboard, setLeaderboard] = useState([]);
 
   const fetchData = async () => {
@@ -17,7 +19,7 @@ const Leaderboard = ({ currentUser }) => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const dot = () => {
     return (
@@ -113,9 +115,4 @@ const Leaderboard = ({ currentUser }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  //leaderboard: state.leaderboard.leaderboard,
-  currentUser: state.user.currentUser,
-});
-
-export default connect(mapStateToProps)(Leaderboard);
+export default Leaderboard;

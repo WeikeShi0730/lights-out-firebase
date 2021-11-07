@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { signInWithEmail } from "../../firebase/firebase.utils";
-import { setCurrentUser } from "../../redux/actions/user.action";
 
-const SignIn = ({ setCurrentUser }) => {
+const SignIn = () => {
   const [signInInfo, setSignInInfo] = useState({
     email: "",
     password: "",
@@ -15,8 +13,7 @@ const SignIn = ({ setCurrentUser }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const currentUser = await signInWithEmail(signInInfo);
-      setCurrentUser(currentUser);
+      await signInWithEmail(signInInfo);
       history.push("/");
     } catch (error) {
       toast.error("error signing in", {
@@ -96,4 +93,4 @@ const SignIn = ({ setCurrentUser }) => {
   );
 };
 
-export default connect(null, { setCurrentUser })(SignIn);
+export default SignIn;

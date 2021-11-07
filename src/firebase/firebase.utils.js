@@ -122,14 +122,18 @@ const getUserFirestore = async (user) => {
 const q = query(collection(db, "users"), orderBy("timer"));
 export const getUsers = () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      unsubscribe();
-      const users = [];
-      querySnapshot.forEach((doc) => {
-        users.push(doc.data());
-      });
-      resolve(users);
-    }, reject);
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        unsubscribe();
+        const users = [];
+        querySnapshot.forEach((doc) => {
+          users.push(doc.data());
+        });
+        resolve(users);
+      },
+      reject
+    );
   });
 };
 

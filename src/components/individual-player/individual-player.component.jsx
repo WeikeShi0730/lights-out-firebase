@@ -1,8 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import ReactCountryFlag from "react-country-flag";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase/firebase.utils";
 
-const IndividualPlayer = ({ currentUser, user, ranking }) => {
+const IndividualPlayer = ({ user, ranking }) => {
+  const [currentUser] = useAuthState(auth);
   const rankingMedal = (ranking) => {
     switch (ranking) {
       case 1:
@@ -22,7 +24,7 @@ const IndividualPlayer = ({ currentUser, user, ranking }) => {
       }`}
       key={user.id}
     >
-      <div className="col-span-4 mx-5"> 
+      <div className="col-span-4 mx-5">
         <span className="">{rankingMedal(ranking)}</span>{" "}
         <span className="flex-shrink-0">
           <ReactCountryFlag countryCode={user.country} svg />{" "}
@@ -38,8 +40,4 @@ const IndividualPlayer = ({ currentUser, user, ranking }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
-
-export default connect(mapStateToProps)(IndividualPlayer);
+export default IndividualPlayer;

@@ -2,12 +2,10 @@ import React, { useState, useMemo } from "react";
 import Select from "react-select";
 import countryList from "../../assets/country-list.json";
 import { Link, useHistory } from "react-router-dom";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { signUpWithEmailAndPassword } from "../../firebase/firebase.utils";
-import { setCurrentUser } from "../../redux/actions/user.action";
 
-const SignUp = ({ setCurrentUser }) => {
+const SignUp = () => {
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList, []);
   const history = useHistory();
@@ -40,8 +38,7 @@ const SignUp = ({ setCurrentUser }) => {
   const handleSignUpFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const currentUser = await signUpWithEmailAndPassword(signUpInfo);
-      setCurrentUser(currentUser);
+      await signUpWithEmailAndPassword(signUpInfo);
       history.push("/");
       toast.success("success ✅", {
         position: toast.POSITION.TOP_CENTER,
@@ -139,4 +136,4 @@ const SignUp = ({ setCurrentUser }) => {
   );
 };
 
-export default connect(null, { setCurrentUser })(SignUp);
+export default SignUp;

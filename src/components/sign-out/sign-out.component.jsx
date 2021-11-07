@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { setCurrentUser } from "../../redux/actions/user.action";
 import {
   auth,
   signOutGoogle,
@@ -10,11 +8,10 @@ import {
 } from "../../firebase/firebase.utils";
 import { toast } from "react-toastify";
 
-const SignOut = ({ setCurrentUser }) => {
+const SignOut = () => {
   const clearCurrentUser = async () => {
     try {
       if (auth.currentUser) {
-        setCurrentUser(null);
         await signOutGoogle();
       }
     } catch (error) {
@@ -88,4 +85,4 @@ const SignOut = ({ setCurrentUser }) => {
   );
 };
 
-export default connect(null, { setCurrentUser })(SignOut);
+export default SignOut;
