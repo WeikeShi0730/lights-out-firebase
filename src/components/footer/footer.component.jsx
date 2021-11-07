@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="text-xs md:text-sm">
         <a
           className="flex justify-center items-center font-black"
-          href="https://github.com/WeikeShi0730/lights-out-node"
+          href="https://github.com/WeikeShi0730/lights-out-firebase"
         >
           @ github
           <img src="/icons8-github-24.png" alt="github" />
