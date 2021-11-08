@@ -16,11 +16,11 @@ const SignIn = () => {
       await signInWithEmail(signInInfo);
       history.push("/");
     } catch (error) {
-      toast.error("error signing in", {
+      toast.error("error signing in: " + error.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error("error signing in: ", error);
+      console.error("error signing in: ", error.message);
     }
   };
 

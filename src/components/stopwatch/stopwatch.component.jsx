@@ -27,16 +27,17 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
       const user = await getUserFirestore(currentUser);
       setCurrentBest(user.timer);
     } catch (error) {
-      toast.error("error fecthing user data", {
+      toast.error("error fecthing user data: " + error.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error("error signing in: ", error);
+      console.error("error fecthing user data: ", error.message);
     }
   };
 
   useEffect(() => {
-    if (currentUser) {
+    if (auth.currentUser) {
+      console.log(currentUser);
       fetchCurrentUser();
     } else {
       setCurrentBest(null);
@@ -159,7 +160,7 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",
         });
-        console.error("error updating user timer, ", error);
+        console.error("error updating user timer, ", error.message);
       }
     }
   };

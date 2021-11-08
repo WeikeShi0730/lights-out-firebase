@@ -46,11 +46,11 @@ const SignUp = () => {
         autoClose: 2000,
       });
     } catch (error) {
-      toast.error("error creating the profile", {
+      toast.error("error creating the profile: " + error.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error("Error creating the profile: ", error);
+      console.error("Error creating the profile: ", error.message);
     }
   };
 

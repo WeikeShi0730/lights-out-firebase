@@ -28,11 +28,11 @@ const SignOut = () => {
         autoClose: 2000,
       });
     } catch (error) {
-      toast.error("error deleting account", {
+      toast.error("error deleting account: " + error.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error("error deleting account", error);
+      console.error("error deleting account", error.message);
     }
   };
 
@@ -45,11 +45,11 @@ const SignOut = () => {
         autoClose: 3000,
       });
     } catch (error) {
-      toast.error("error deleting record", {
+      toast.error("error deleting record: " + error.message, {
         position: toast.POSITION.TOP_CENTER,
         theme: "dark",
       });
-      console.error("error deleting record", error);
+      console.error("error deleting record", error.message);
     }
   };
 
