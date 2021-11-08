@@ -1,5 +1,4 @@
 import React from "react";
-//import { getUsers } from "../../firebase/firebase.utils";
 import IndividualPlayer from "../individual-player/individual-player.component";
 import { auth, leaderboardQuery } from "../../firebase/firebase.utils";
 import { useAuthState } from "react-firebase-hooks/auth";

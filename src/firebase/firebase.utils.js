@@ -66,8 +66,6 @@ export const signInWithEmail = async (signInInfo) => {
       signInInfo.email,
       signInInfo.password
     );
-    const currentUser = await getUserFirestore(signInInfo);
-    return currentUser;
   } catch (error) {
     console.error("Error signing: ", error);
     throw error;
@@ -103,7 +101,7 @@ const createUserFirestore = async (user) => {
   }
 };
 
-const getUserFirestore = async (user) => {
+export const getUserFirestore = async (user) => {
   try {
     const docRef = doc(db, "users", user.email);
     const docSnap = await getDoc(docRef);
@@ -118,7 +116,22 @@ const getUserFirestore = async (user) => {
   }
 };
 
-export const leaderboardQuery = query(collection(db, "users"), orderBy("timer"));
+export const updateUserTimer = async (userEmail, userNewTimer) => {
+  try {
+    const userRef = doc(db, "users", userEmail);
+    await updateDoc(userRef, {
+      timer: userNewTimer,
+    });
+  } catch (error) {
+    console.error("Error updating timer: ", error);
+    throw error;
+  }
+};
+
+export const leaderboardQuery = query(
+  collection(db, "users"),
+  orderBy("timer")
+);
 
 const deleteUserFirestore = async (userEmail) => {
   try {

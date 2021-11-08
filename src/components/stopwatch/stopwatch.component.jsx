@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth } from "../../firebase/firebase.utils";
+import {
+  auth,
+  updateUserTimer,
+  getUserFirestore,
+} from "../../firebase/firebase.utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./stopwatch.styles.scss";
 
@@ -15,10 +19,29 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
   const [intervalLights, setIntervalLights] = useState(0);
   const [timeOut, setTimeOut] = useState(0);
   const [currentUser] = useAuthState(auth);
-  const [currentBest, setCurrentBest] = useState(
-    currentUser ? currentUser.timer : null
-  );
+  const [currentBest, setCurrentBest] = useState(null);
   const history = useHistory();
+
+  const fetchCurrentUser = async () => {
+    try {
+      const user = await getUserFirestore(currentUser);
+      setCurrentBest(user.timer);
+    } catch (error) {
+      toast.error("error fecthing user data", {
+        position: toast.POSITION.TOP_CENTER,
+        theme: "dark",
+      });
+      console.error("error signing in: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchCurrentUser();
+    } else {
+      setCurrentBest(null);
+    }
+  }, [auth]);
 
   const intervalLightsRef = useRef(intervalLights);
   intervalLightsRef.current = intervalLights;
@@ -76,7 +99,6 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
         notifyPlayingWithoutSigningIn();
       }
       await handleBestTime(timer);
-      //await updateLeaderboard();
     } else {
       console.log("error");
     }
@@ -120,21 +142,12 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
     });
   };
 
-  // const updateLeaderboard = async () => {
-  //   //const leaderboard = await UserService.getAll();
-  //   const leaderboard = null;
-  //   setLeaderboard(leaderboard.data);
-  // };
-
   const handleBestTime = async (currentTimer) => {
     currentTimer = currentTimer / 1000;
     if (currentTimer < currentBest) {
       setCurrentBest(currentTimer);
       try {
-        let updatedUser = { ...currentUser };
-        updatedUser["timer"] = currentTimer;
-        const { token, ...updatedUserNoToken } = updatedUser;
-        //await UserService.update(updatedUserNoToken, token);
+        await updateUserTimer(currentUser.email, currentTimer);
         toast.success("new personal record 🎉", {
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",
@@ -142,10 +155,11 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
         });
       } catch (error) {
         history.push("/sign-in");
-        toast.error(error.response.data.message, {
+        toast.error("error updating user timer, please sign in again", {
           position: toast.POSITION.TOP_CENTER,
           theme: "dark",
         });
+        console.error("error updating user timer, ", error);
       }
     }
   };
