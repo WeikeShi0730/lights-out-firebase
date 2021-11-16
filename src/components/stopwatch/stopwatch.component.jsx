@@ -42,6 +42,7 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
     } else {
       setCurrentBest(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   const intervalLightsRef = useRef(intervalLights);
