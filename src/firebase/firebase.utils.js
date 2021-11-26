@@ -51,7 +51,7 @@ export const signUpWithEmailAndPassword = async (signUpInfo) => {
       displayName: signUpInfo.name,
     });
     const { password, ...signUpInfoWithoutPassword } = signUpInfo;
-    await createUserFirestore(signUpInfoWithoutPassword); // what if only this step threw error?????
+    await createUserFirestore(signUpInfoWithoutPassword);
     return signUpInfoWithoutPassword;
   } catch (error) {
     console.error("Error creating the profile: ", error);
