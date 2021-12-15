@@ -1,12 +1,13 @@
 import React from "react";
 import IndividualPlayer from "../individual-player/individual-player.component";
+import Loader from "../loader/loader.component";
 import { auth, leaderboardQuery } from "../../firebase/firebase.utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const Leaderboard = () => {
   const [currentUser] = useAuthState(auth);
-  const [leaderboard] = useCollectionData(leaderboardQuery);
+  const [leaderboard, loading] = useCollectionData(leaderboardQuery);
 
   const dot = () => {
     return (
@@ -96,7 +97,7 @@ const Leaderboard = () => {
         leaderboard
       </h1>
       <div className="text-xs sm:text-sm lg:text-base">
-        {leaderboard ? leaderboardList() : "Loading..."}
+        {loading ? <Loader /> : leaderboardList()}
       </div>
     </div>
   );
