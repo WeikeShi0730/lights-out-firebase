@@ -12,7 +12,7 @@ import SignOut from "./components/sign-out/sign-out.component";
 
 function App() {
   return (
-    <div>
+    <div className="h-full w-full">
       <ToastContainer autoClose={4000} />
       <Header />
       <Switch>
