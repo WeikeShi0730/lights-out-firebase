@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -184,7 +184,7 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
   }, [clickedInside]);
 
   return (
-    <Fragment>
+    <>
       <h3 className="text-center text-sm lg:text-md">
         tap/click when you are ready to race, and tap again when the lights go
         out
@@ -204,7 +204,7 @@ const Stopwatch = ({ onLightsChange, clickedInside }) => {
           </span>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

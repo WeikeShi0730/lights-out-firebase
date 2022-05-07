@@ -7,9 +7,9 @@ import Leaderboard from "../../components/leaderboard/leaderboard.component";
 
 const Main = () => {
   return (
-    <React.Fragment>
-      <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-3 lg:gap-4">
-        <div className="p-2 lg:col-span-2 main">
+    <>
+      <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-3 lg:gap-4 my-20 mx-5">
+        <div className="p-2 lg:col-span-2 main ">
           <ClickInside>
             <Lights />
           </ClickInside>
@@ -18,7 +18,7 @@ const Main = () => {
           <Leaderboard />
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
